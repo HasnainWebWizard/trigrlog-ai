@@ -1,7 +1,9 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Target, MessageSquare, Zap, Hash, Info } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
+import { useSession } from "next-auth/react";
 
 const tones = [
   { id: 'tech', name: 'Technical', desc: 'Deep-dive style for engineers', icon: <Zap size={14} /> },
@@ -10,8 +12,50 @@ const tones = [
 ];
 
 export default function ToneSettings() {
+  const { data: session } = useSession();
   const [selectedTone, setSelectedTone] = useState('tech');
   const [keywords, setKeywords] = useState('');
+  const [isSaving, setIsSaving] = useState(false);
+
+
+  // 🏛️ Fetch saved settings from Supabase when the page loads
+  useEffect(() => {
+    async function loadImperialSettings() {
+      if (session?.user?.id) {
+        const { data, error } = await supabase
+          .from('profiles')
+          .select('selected_tone, keywords')
+          .eq('id', session.user.id)
+          .single();
+
+        if (data) {
+          setSelectedTone(data.selected_tone);
+          setKeywords(data.keywords || '');
+        }
+      }
+    }
+    loadImperialSettings();
+  }, [session]);
+
+  // 🏛️ Save settings to the database
+
+  // Update saveSettings:
+  const saveSettings = async (newTone: string, newKeywords: string) => {
+    if (!session?.user?.id) return;
+    setIsSaving(true);
+
+    const { error } = await supabase
+      .from('profiles')
+      .upsert({
+        id: session.user.id,
+        selected_tone: newTone,
+        keywords: newKeywords,
+        updated_at: new Date(),
+      });
+
+    if (error) console.error("Database Error:", error.message);
+    setIsSaving(false);
+  };
 
   return (
     <div className="rounded-2xl border border-white/10 bg-[#161b22] p-6 shadow-xl">
@@ -30,12 +74,14 @@ export default function ToneSettings() {
           {tones.map((tone) => (
             <button
               key={tone.id}
-              onClick={() => setSelectedTone(tone.id)}
-              className={`flex flex-col items-start rounded-xl border p-3 transition-all text-left ${
-                selectedTone === tone.id
-                  ? 'border-cyan-500/50 bg-cyan-500/5 ring-1 ring-cyan-500/20'
-                  : 'border-white/5 bg-black/20 hover:border-white/20'
-              }`}
+              onClick={() => {
+                setSelectedTone(tone.id);
+                saveSettings(tone.id, keywords); // Save on click
+              }}
+              className={`flex flex-col items-start rounded-xl border p-3 transition-all text-left ${selectedTone === tone.id
+                ? 'border-cyan-500/50 bg-cyan-500/5 ring-1 ring-cyan-500/20'
+                : 'border-white/5 bg-black/20 hover:border-white/20'
+                }`}
             >
               <div className="flex items-center gap-2 mb-1">
                 <span className={selectedTone === tone.id ? 'text-cyan-400' : 'text-gray-400'}>
@@ -57,26 +103,21 @@ export default function ToneSettings() {
           <label className="text-[10px] font-bold uppercase tracking-widest text-gray-500 flex items-center gap-1">
             <Hash size={12} /> Keywords
           </label>
-          <div className="group relative cursor-help">
-            <Info size={12} className="text-gray-600" />
-            <div className="absolute bottom-full right-0 mb-2 w-48 rounded-md bg-black border border-white/10 p-2 text-[10px] text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-              Injected tags help the AI prioritize terms like "React", "Rust", or "Cloud".
-            </div>
-          </div>
         </div>
         <input
           type="text"
           value={keywords}
           onChange={(e) => setKeywords(e.target.value)}
+          onBlur={() => saveSettings(selectedTone, keywords)} // Save when you click away
           placeholder="e.g. TypeScript, AWS, TDD"
-          className="w-full rounded-lg border border-white/10 bg-black/40 p-3 text-sm text-white placeholder:text-gray-700 focus:border-cyan-500/50 focus:outline-none focus:ring-1 focus:ring-cyan-500/20 transition-all"
+          className="w-full rounded-lg border border-white/10 bg-black/40 p-3 text-sm text-white focus:border-cyan-500/50 focus:outline-none transition-all"
         />
       </div>
 
       {/* Footer Note */}
       <div className="mt-6 rounded-lg bg-cyan-500/5 border border-cyan-500/10 p-3">
         <p className="text-[10px] text-cyan-500/80 leading-relaxed italic">
-          "The AI will automatically prioritize these settings for all future drafts in this session, My Lord."
+          "The archives will remember your choice even across sessions, My Lord."
         </p>
       </div>
     </div>

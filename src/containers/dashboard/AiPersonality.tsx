@@ -1,7 +1,8 @@
 import { Sparkles } from "lucide-react";
 import ToneSettings from "./ToneSettings";
 
-export default function RightSideBar() {
+
+export default function AiPernsonality() {
     return (
         <>
             <aside className="w-full lg:w-80 lg:shrink-0">

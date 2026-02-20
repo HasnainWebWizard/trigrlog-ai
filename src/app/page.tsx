@@ -9,6 +9,7 @@ export default function MarketingPage() {
             <HeroSection />
             {/* Optional: Add a small "How it Works" section below the Hero */}
             <Features />
+            
         </>
     );
 }

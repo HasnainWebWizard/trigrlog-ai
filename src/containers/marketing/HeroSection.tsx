@@ -91,7 +91,7 @@ export default function HeroSection() {
                             <Share2 size={14} /> Generated Post
                         </div>
                         <div className="w-full rounded-lg bg-[#1d2226] p-4 text-sm text-white border border-white/5 shadow-lg">
-                            <p className="font-semibold text-cyan-400">Ayakaa • Just now</p>
+                            <p className="font-semibold text-cyan-400">USER • Just now</p>
                             <p className="mt-2 text-gray-300">Just refactored the auth flow to use JWT, improving security and scalability... #React #WebDev</p>
                         </div>
                     </div>
