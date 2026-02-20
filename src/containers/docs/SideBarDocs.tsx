@@ -6,21 +6,21 @@ export default function SideBarDocs() {
             title: "Getting Started", 
             links: [
                 { name: "Introduction", href: "#introduction" }, 
-                { name: "Quick Start", href: "#quick-start" }
+                { name: "AI Personality", href: "#personality" } // 🏛️ Updated link
             ] 
         },
         { 
-            title: "Core Concepts", 
+            title: "Core Mechanics", 
             links: [
-                { name: "How it Works", href: "#how-it-works" }, 
-                { name: "AI Generation", href: "#ai" }
+                { name: "Daily Pulse Logic", href: "#daily-pulse" }, // 🏛️ New critical section
+                { name: "Generation Rules", href: "#constraints" }  // 🏛️ New constraints section
             ] 
         },
         { 
-            title: "Configuration", 
+            title: "Operations", 
             links: [
-                { name: "GitHub Integration", href: "#github" }, 
-                { name: "LinkedIn Setup", href: "#linkedin" }
+                { name: "Professional Sync", href: "#linkedin" }, 
+                { name: "System Health", href: "#system-health" }  // 🏛️ Troubleshooting link
             ] 
         },
     ];
@@ -30,13 +30,15 @@ export default function SideBarDocs() {
             <nav className="space-y-8">
                 {sections.map((section) => (
                     <div key={section.title}>
-                        <h4 className="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-500">{section.title}</h4>
-                        <ul className="space-y-2">
+                        <h4 className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500/80">
+                            {section.title}
+                        </h4>
+                        <ul className="space-y-1">
                             {section.links.map((link) => (
                                 <li key={link.href}>
                                     <Link 
                                         href={link.href} 
-                                        className="text-sm text-gray-400 hover:text-cyan-400 transition-colors block py-1"
+                                        className="text-[13px] text-gray-400 hover:text-cyan-400 hover:translate-x-1 transition-all duration-200 block py-1.5"
                                     >
                                         {link.name}
                                     </Link>

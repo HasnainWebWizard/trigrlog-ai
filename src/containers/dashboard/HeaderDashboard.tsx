@@ -50,9 +50,9 @@ export default function HeaderDashboard() {
                         <Bell size={20} />
                     </button>
 
-                    <div className="h-8 w-px bg-white/10 mx-1" />
+                    {/* <div className="h-8 w-px bg-white/10 mx-1" /> */}
 
-                    <div className="flex items-center gap-3">
+                    {/* <div className="flex items-center gap-3">
                         <div className="text-right hidden sm:block">
                             <p className="text-xs font-semibold text-white leading-none mb-1">
                                 {session?.user?.name || "Ayakaa"}
@@ -66,7 +66,7 @@ export default function HeaderDashboard() {
                             alt="Profile"
                             className="h-9 w-9 rounded-full border-2 border-cyan-500/30 object-cover"
                         />
-                    </div>
+                    </div> */}
                 </div>
             </div>
 

@@ -8,15 +8,16 @@ interface CommitsListProps {
   commits: any[];
   loading: boolean;
   repoName?: string;
+  owner?: string; // 🏛️ Added: We need the owner to fetch commit details
 }
 
-export default function CommitsList({ commits, loading, repoName }: CommitsListProps) {
-  
+export default function CommitsList({ commits, loading, repoName, owner }: CommitsListProps) {
+
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center py-20 text-gray-500">
-        <Loader2 className="animate-spin mb-4 text-cyan-500" size={32} />
-        <p className="text-sm italic">Consulting the GitHub archives, My Lord...</p>
+      <div className="flex flex-col items-center justify-center py-20 text-cyan-500/50">
+        <Loader2 className="animate-spin mb-4" size={32} />
+        <p className="text-sm font-mono tracking-widest uppercase">Scanning the Archives...</p>
       </div>
     );
   }
@@ -35,12 +36,13 @@ export default function CommitsList({ commits, loading, repoName }: CommitsListP
         <CommitCard 
           key={commit.sha} 
           commit={{
-            id: commit.sha.substring(0, 7),
-            repo: repoName || 'Unknown Repo',
+            id: commit.sha.substring(0, 7), // Short version for display
+            sha: commit.sha,                // 🏛️ FULL SHA: Crucial for the GitHub Detail API
+            owner: owner || '',             // 🏛️ OWNER: Crucial for the GitHub Detail API
+            repo: repoName || 'Unknown',
             time: new Date(commit.date).toLocaleDateString(),
             title: commit.message,
-            // We keep the draft empty for now, Phase 5 will fill this with AI
-            draft: "Generating Imperial Draft..." 
+            draft: "" 
           }} 
         />
       ))}

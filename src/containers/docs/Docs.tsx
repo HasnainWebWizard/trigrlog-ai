@@ -1,119 +1,115 @@
-import { Info, Terminal, BrainCircuit, Sparkles, Zap, Github, Linkedin, Settings, ShieldCheck, Share2 } from "lucide-react";
+"use client";
+
+import React from 'react';
+import { 
+    Info, Terminal, BrainCircuit, Sparkles, Zap, Github, 
+    Linkedin, Settings, ShieldCheck, Share2, Target, Lock, Database 
+} from "lucide-react";
 
 export default function Docs() {
     return (
         <div className="space-y-24 pb-20">
-            {/* 1. Introduction */}
+            {/* 1. Executive Summary */}
             <article id="introduction" className="prose prose-invert prose-cyan max-w-none scroll-mt-24">
-                <h1 className="text-4xl font-extrabold text-white mb-4">Introduction</h1>
+                <h1 className="text-4xl font-extrabold text-white mb-4">The TrigrLog Ecosystem</h1>
                 <p className="text-lg text-gray-400">
-                    Welcome to TrigrLog AI. This platform is designed to bridge the gap between your hard work in the terminal and your professional presence on LinkedIn.
+                    TrigrLog AI is an autonomous branding engine. It bridges the gap between raw terminal activity and professional storytelling by analyzing your GitHub metadata in real-time.
                 </p>
 
                 <div className="my-8 rounded-xl border border-cyan-500/20 bg-cyan-500/5 p-4 flex gap-4">
                     <Info className="text-cyan-400 shrink-0" />
                     <p className="text-sm text-cyan-100/80 m-0">
-                        TrigrLog AI uses the Groq LPU™ Inference Engine to generate high-quality posts in milliseconds.
+                        <strong>The Core Mission:</strong> High-impact social presence with zero manual writing effort.
                     </p>
                 </div>
             </article>
 
-            {/* 2. Quick Start */}
-            <article id="quick-start" className="prose prose-invert prose-cyan max-w-none scroll-mt-24">
-                <h2 className="text-3xl font-bold text-white mb-6">Quick Start</h2>
-                <p className="text-gray-400 font-medium">Step 1: Install the CLI</p>
-                <div className="rounded-lg bg-black p-4 font-mono text-sm text-green-400 border border-white/10 mb-4">
-                    <div className="flex gap-2">
-                        <Terminal size={16} />
-                        <span>npm install trigrlog-ai@latest</span>
-                    </div>
-                </div>
-                <p className="text-gray-400 font-medium">Step 2: Initialize your project</p>
-                <div className="rounded-lg bg-black p-4 font-mono text-sm text-cyan-400 border border-white/10">
-                    <div className="flex gap-2">
-                        <Terminal size={16} />
-                        <span>trigr init</span>
-                    </div>
-                </div>
-            </article>
-
-            {/* 3. How it Works */}
-            <article id="how-it-works" className="prose prose-invert prose-cyan max-w-none scroll-mt-24">
-                <h2 className="text-3xl font-bold text-white mb-6">How it Works</h2>
-                <div className="grid gap-4 md:grid-cols-2">
+            {/* 2. AI Personality (The Brain) */}
+            <article id="personality" className="prose prose-invert prose-cyan max-w-none scroll-mt-24">
+                <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-3">
+                    <BrainCircuit className="text-purple-400" /> AI Personality Engine
+                </h2>
+                <p className="text-gray-400">
+                    The generation engine is calibrated via the <strong>AI Personality</strong> settings. This defines how the Llama 3 models interpret your work.
+                </p>
+                <div className="grid gap-4 md:grid-cols-3 mt-6">
                     {[
-                        { title: "Connect", desc: "Link GitHub securely via OAuth.", icon: <Github size={20}/> },
-                        { title: "Fetch", desc: "Retrieve latest commits & diffs.", icon: <Terminal size={20}/> },
-                        { title: "Analyze", desc: "AI interprets logical changes.", icon: <BrainCircuit size={20}/> },
-                        { title: "Post", desc: "Generate polished LinkedIn updates.", icon: <Linkedin size={20}/> },
-                    ].map((step, i) => (
-                        <div key={i} className="flex items-start gap-4 p-4 rounded-lg bg-white/5 border border-white/5">
-                            <div className="text-cyan-400 mt-1">{step.icon}</div>
-                            <div>
-                                <strong className="text-white block">{step.title}</strong>
-                                <span className="text-gray-400 text-sm">{step.desc}</span>
-                            </div>
+                        { name: "Technical", desc: "Focuses on architecture and logic.", icon: <Zap size={18}/> },
+                        { name: "Casual", desc: "Peers-focused, approachable language.", icon: <Share2 size={18}/> },
+                        { name: "Job Hunter", desc: "SEO-optimized for recruiters.", icon: <Target size={18}/> },
+                    ].map((tone, i) => (
+                        <div key={i} className="p-4 rounded-xl bg-white/5 border border-white/10">
+                            <div className="text-cyan-400 mb-2">{tone.icon}</div>
+                            <strong className="text-white block text-sm">{tone.name}</strong>
+                            <span className="text-gray-500 text-xs">{tone.desc}</span>
                         </div>
                     ))}
                 </div>
             </article>
 
-            {/* 4. AI Generation */}
-            <article id="ai" className="prose prose-invert prose-cyan max-w-none scroll-mt-24">
+            {/* 3. Daily Pulse (The Credit System) */}
+            <article id="daily-pulse" className="prose prose-invert prose-cyan max-w-none scroll-mt-24">
                 <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-3">
-                    <Sparkles className="text-cyan-400" /> AI Generation
+                    <Sparkles className="text-amber-400" /> Daily Pulse Logic
                 </h2>
                 <p className="text-gray-400">
-                    TrigrLog AI uses Large Language Models to convert technical jargon into human-readable stories.
+                    The Daily Pulse is a high-value synthesis of your last 12-15 commits. It is governed by a strict temporal cooldown.
                 </p>
+                <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-6">
+                    <ul className="text-sm text-amber-100/80 space-y-3 m-0 list-none">
+                        <li className="flex items-center gap-2"><Lock size={14}/> <strong>12-Hour Cooldown:</strong> Credits reset exactly 12 hours after the last generation.</li>
+                        <li className="flex items-center gap-2"><Database size={14}/> <strong>Deep Scan:</strong> If commit messages are vague, the AI scans file paths (e.g., <code>/api</code> or <code>/hooks</code>) to determine impact.</li>
+                        <li className="flex items-center gap-2"><Zap size={14}/> <strong>LPU Inference:</strong> Powered by Groq for sub-second generation times.</li>
+                    </ul>
+                </div>
+            </article>
 
-                <div className="my-6 rounded-xl border border-amber-500/20 bg-amber-500/5 p-6">
-                    <div className="flex items-center gap-2 text-amber-400 mb-2 font-bold uppercase tracking-tight text-xs">
-                        <Zap size={14} /> Powered by Groq LPU™
-                    </div>
-                    <p className="text-sm text-amber-100/80 m-0 leading-relaxed">
-                        Llama 3 runs on Groq's specialized hardware, ensuring your post is ready in under 1 second.
+            {/* 4. Generation Constraints (The Rules) */}
+            <article id="constraints" className="prose prose-invert prose-cyan max-w-none scroll-mt-24">
+                <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-3">
+                    <ShieldCheck className="text-green-400" /> Generation Rules
+                </h2>
+                <p className="text-gray-400">Every post generated follows the "Imperial Logic" for maximum LinkedIn engagement:</p>
+                <table className="w-full text-sm border-collapse">
+                    <thead>
+                        <tr className="border-b border-white/10 text-left">
+                            <th className="py-2 text-cyan-400">Constraint</th>
+                            <th className="py-2 text-cyan-400">Logic</th>
+                        </tr>
+                    </thead>
+                    <tbody className="text-gray-300">
+                        <tr className="border-b border-white/5"><td className="py-2 font-mono">Length</td><td className="py-2">Exactly 2 sentences (140-190 chars).</td></tr>
+                        <tr className="border-b border-white/5"><td className="py-2 font-mono">Format</td><td className="py-2">No hashtags. 1 Technical Emoji at the end.</td></tr>
+                        <tr className="border-b border-white/5"><td className="py-2 font-mono">Priority</td><td className="py-2">Modified Files {'>'} Commit Message.</td></tr>
+                        <tr><td className="py-2 font-mono">Verbs</td><td className="py-2">Architected, Streamlined, Implemented.</td></tr>
+                    </tbody>
+                </table>
+            </article>
+
+            {/* 5. System Health & Database */}
+            <article id="system-health" className="prose prose-invert prose-cyan max-w-none scroll-mt-24">
+                <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-3">
+                    <Settings className="text-gray-400" /> System Troubleshooting
+                </h2>
+                <div className="bg-red-500/5 border border-red-500/20 rounded-xl p-4 text-sm">
+                    <p className="text-red-200 font-bold mb-2 flex items-center gap-2">
+                        <Terminal size={14} /> Write Batch Active Error
+                    </p>
+                    <p className="text-red-100/70 m-0">
+                        If the terminal shows <code>Persisting failed</code>, the local Supabase instance is undergoing compaction. 
+                        <strong>Solution:</strong> Restart your dev environment with <code>npx supabase stop && npx supabase start</code>.
                     </p>
                 </div>
             </article>
 
-            {/* 5. GitHub Integration (New) */}
-            <article id="github" className="prose prose-invert prose-cyan max-w-none scroll-mt-24">
-                <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-3">
-                    <Github className="text-white" /> GitHub Integration
-                </h2>
-                <p className="text-gray-400">
-                    To automate your logging, you must grant TrigrLog AI access to your repository metadata.
-                </p>
-                <div className="space-y-4">
-                    <div className="flex gap-4 items-start">
-                        <div className="bg-white/10 p-2 rounded text-cyan-400"><ShieldCheck size={20}/></div>
-                        <p className="text-sm text-gray-300 m-0"><strong>Permissions:</strong> We only request read-access to your commits and repository names. We never see your private code contents unless you explicitly analyze a diff.</p>
-                    </div>
-                    <div className="flex gap-4 items-start">
-                        <div className="bg-white/10 p-2 rounded text-cyan-400"><Settings size={20}/></div>
-                        <p className="text-sm text-gray-300 m-0"><strong>Webhook Setup:</strong> TrigrLog automatically installs a webhook to listen for <code>push</code> events, triggering a post generation instantly.</p>
-                    </div>
-                </div>
-            </article>
-
-            {/* 6. LinkedIn Setup (New) */}
+            {/* 6. LinkedIn Integration */}
             <article id="linkedin" className="prose prose-invert prose-cyan max-w-none scroll-mt-24">
                 <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-3">
-                    <Linkedin className="text-blue-400" /> LinkedIn Setup
+                    <Linkedin className="text-blue-400" /> Professional Sync
                 </h2>
                 <p className="text-gray-400">
-                    Finalize your profile to share your journey with your professional network.
+                    Once a draft is generated, it remains in your <strong>Drafts Dashboard</strong> until you manually push it to LinkedIn via the OAuth2 connector.
                 </p>
-                <div className="rounded-xl border border-white/10 bg-gradient-to-br from-blue-500/5 to-cyan-500/5 p-6">
-                    <h4 className="text-white mt-0 mb-4 flex items-center gap-2">
-                        <Share2 size={18} className="text-blue-400" /> Auto-Post vs Draft
-                    </h4>
-                    <ul className="text-sm text-gray-300 space-y-2">
-                        <li><strong>Draft Mode (Default):</strong> AI generates the post and waits for your approval in the dashboard.</li>
-                        <li><strong>Auto-Pilot:</strong> Posts are published directly to your LinkedIn feed upon every successful GitHub push.</li>
-                    </ul>
-                </div>
             </article>
         </div>
     );
