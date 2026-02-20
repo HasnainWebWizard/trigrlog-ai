@@ -6,27 +6,29 @@ export default function SideBarDocs() {
             title: "Getting Started", 
             links: [
                 { name: "Introduction", href: "#introduction" }, 
-                { name: "AI Personality", href: "#personality" } // 🏛️ Updated link
+                { name: "Core Features", href: "#features" },      // 🏛️ New: Direct access to Feature Registry
+                { name: "AI Personality", href: "#personality" }
             ] 
         },
         { 
             title: "Core Mechanics", 
             links: [
-                { name: "Daily Pulse Logic", href: "#daily-pulse" }, // 🏛️ New critical section
-                { name: "Generation Rules", href: "#constraints" }  // 🏛️ New constraints section
+                { name: "How it Works", href: "#how-it-works" },    // 🏛️ Re-added: Engineering logic section
+                { name: "Daily Pulse Logic", href: "#daily-pulse" }, 
+                { name: "Generation Rules", href: "#constraints" }  
             ] 
         },
         { 
             title: "Operations", 
             links: [
                 { name: "Professional Sync", href: "#linkedin" }, 
-                { name: "System Health", href: "#system-health" }  // 🏛️ Troubleshooting link
+                { name: "System Health", href: "#system-health" }  
             ] 
         },
     ];
 
     return (
-        <aside className="fixed left-0 top-16 hidden h-[calc(100vh-4rem)] w-64 overflow-y-auto border-r border-white/5 bg-[#0d1117] p-6 md:block">
+        <aside className="fixed left-0 top-16 hidden h-[calc(100vh-4rem)] w-64 overflow-y-auto border-r border-white/5 bg-[#0d1117] p-6 md:block scrollbar-hide">
             <nav className="space-y-8">
                 {sections.map((section) => (
                     <div key={section.title}>
