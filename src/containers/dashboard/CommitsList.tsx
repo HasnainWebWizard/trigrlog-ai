@@ -47,10 +47,10 @@ export default function CommitsList({ commits, loading, repoName, owner }: Commi
         />
       ))}
 
-      <button className="group flex w-full items-center justify-center gap-2 rounded-xl border-2 border-dashed border-white/5 py-8 text-gray-500 transition-all hover:border-cyan-500/30 hover:text-cyan-400">
+      {/* <button className="group flex w-full items-center justify-center gap-2 rounded-xl border-2 border-dashed border-white/5 py-8 text-gray-500 transition-all hover:border-cyan-500/30 hover:text-cyan-400">
         <Plus size={20} className="transition-transform group-hover:rotate-90" />
         <span className="font-medium">Sync latest updates</span>
-      </button>
+      </button> */}
     </div>
   );
 }

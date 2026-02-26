@@ -26,13 +26,13 @@ export default function Sidebar() {
     ];
 
     return (
-        <aside className="fixed left-0 top-0 flex h-screen w-64 flex-col border-r border-white/10 bg-[#0d1117] p-4 text-gray-400 z-50">
+        <aside className="fixed left-0 top-0 flex h-screen w-64 flex-col border-r border-white/10 bg-[#0d1117] p-4 text-gray-400 z-50 overflow-y-auto">
 
             {/* User Profile Section */}
             <div className="mb-8 flex items-center gap-3 px-2 py-4">
                 <div className="relative">
                     <img
-                        src={session?.user?.image || "https://github.com/identicons/ayakaa.png"}
+                        src={session?.user?.image || "https://github.com/identicons/user.png"}
                         alt={session?.user?.name || "User"}
                         className="h-12 w-12 rounded-full border-2 border-cyan-500/50 shadow-[0_0_10px_rgba(6,182,212,0.3)]"
                     />

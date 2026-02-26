@@ -3,10 +3,20 @@ import GitHub from "next-auth/providers/github";
 import { supabaseAdmin } from "@/lib/supabase";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  providers: [GitHub],
+  providers: [
+    GitHub({
+      // 🏛️ This authorization block is the key to your Records.
+      // 'repo' allows access to private repos, collaborations, and orgs.
+      // 'read:user' ensures we can see the user's profile details.
+      authorization: {
+        params: {
+          scope: "read:user user:email repo",
+        },
+      },
+    }),
+  ],
   callbacks: {
     async signIn({ user, account }) {
-      // 1. Identify the Admin ID
       const imperialId = user.id;
 
       console.log("👑 Attempting to anchor user with Master Key:", imperialId);
@@ -16,7 +26,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         return false;
       }
 
-      // 2. CHANGE 'supabase' TO 'supabaseAdmin' HERE
       const { error } = await supabaseAdmin
         .from('profiles')
         .upsert({

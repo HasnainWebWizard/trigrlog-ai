@@ -1,6 +1,7 @@
-import HeaderComp from "@/components/shared/HeaderComp";
-import Features from "@/containers/marketing/Features";
-import HeroSection from "@/containers/marketing/HeroSection";
+import HeaderComp from "@/components/HeaderComp";
+import Features from "@/containers/Features";
+import Footer from "@/containers/Footer";
+import HeroSection from "@/containers/HeroSection";
 
 export default function MarketingPage() {
     return (
@@ -9,7 +10,7 @@ export default function MarketingPage() {
             <HeroSection />
             {/* Optional: Add a small "How it Works" section below the Hero */}
             <Features />
-            
+            <Footer />
         </>
     );
 }

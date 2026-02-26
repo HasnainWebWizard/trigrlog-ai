@@ -13,7 +13,7 @@ export default function HeaderDashboard() {
 
     return (
         <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#0d1117]/80 backdrop-blur-md">
-            <div className="container mx-auto flex h-16 items-center justify-between px-4">
+            <div className="flex h-16 items-center justify-between px-4">
 
                 {/* Left Section: Mobile Toggle & Logo */}
                 <div className="flex items-center gap-4">
@@ -34,7 +34,10 @@ export default function HeaderDashboard() {
 
                 {/* Center Section: Desktop Navigation */}
                 <nav className="hidden items-center gap-6 text-sm font-medium text-gray-400 md:flex">
-                    <Link href="/dashboard" className="transition-colors hover:text-white">Dashboard</Link>
+                    <Link href="/dashboard" className="flex items-center gap-2 text-sm font-medium text-gray-300 transition-colors hover:text-cyan-400 group">
+                        <LayoutDashboard size={16} className="group-hover:rotate-45 transition-all " />
+                        Dashboard
+                    </Link>
                     <Link href="/docs" className="transition-colors hover:text-white">Docs</Link>
                 </nav>
 
@@ -47,24 +50,6 @@ export default function HeaderDashboard() {
                     <button className="p-2 text-gray-400 hover:text-white">
                         <Bell size={20} />
                     </button>
-
-                    {/* <div className="h-8 w-px bg-white/10 mx-1" /> */}
-
-                    {/* <div className="flex items-center gap-3">
-                        <div className="text-right hidden sm:block">
-                            <p className="text-xs font-semibold text-white leading-none mb-1">
-                                {session?.user?.name || "Ayakaa"}
-                            </p>
-                            <p className="text-[10px] text-cyan-500 uppercase font-bold tracking-tighter">
-                                {session?.user ? "Active" : "Guest"}
-                            </p>
-                        </div>
-                        <img
-                            src={session?.user?.image || "https://github.com/identicons/profile.png"}
-                            alt="Profile"
-                            className="h-9 w-9 rounded-full border-2 border-cyan-500/30 object-cover"
-                        />
-                    </div> */}
                 </div>
             </div>
 
@@ -72,8 +57,12 @@ export default function HeaderDashboard() {
             {isMobileMenuOpen && (
                 <div className="absolute top-16 left-0 w-full bg-[#0d1117] border-b border-white/10 p-4 md:hidden animate-in slide-in-from-top duration-200">
                     <nav className="flex flex-col gap-4">
-                        <Link href="/dashboard" onClick={toggleMenu} className="flex items-center gap-3 text-gray-300 hover:text-cyan-400">
-                            <LayoutDashboard size={18} /> Dashboard
+                        <Link href="/dashboard" className="flex items-center gap-3 text-gray-300 transition-colors hover:text-cyan-400 group">
+                            <LayoutDashboard size={16} className="group-hover:rotate-45 transition-all " />
+                            Dashboard
+                        </Link>
+                        <Link href="/dashboard/repos" onClick={toggleMenu} className="flex items-center gap-3 text-gray-300 hover:text-cyan-400">
+                            <Github size={18} /> Connected Repos
                         </Link>
                         <Link href="/dashboard/history" onClick={toggleMenu} className="flex items-center gap-3 text-gray-300 hover:text-cyan-400">
                             <History size={18} /> Post History

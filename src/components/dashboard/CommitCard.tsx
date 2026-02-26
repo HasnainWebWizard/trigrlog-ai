@@ -95,7 +95,7 @@ export default function CommitCard({ commit }: CommitProps) {
     };
 
     return (
-        <div className="group relative rounded-2xl border border-white/10 bg-[#161b22] p-5 transition-all hover:border-cyan-500/40 hover:shadow-[0_0_30px_rgba(6,182,212,0.1)]">
+        <div className="group relative rounded-2xl border border-white/10 bg-[#161b22] p-4 md:p-5 transition-all hover:border-cyan-500/40 hover:shadow-[0_0_30px_rgba(6,182,212,0.1)]">
             
             <div className="mb-4 flex items-center justify-between">
                 <div className="flex items-center gap-3">
@@ -107,11 +107,11 @@ export default function CommitCard({ commit }: CommitProps) {
                 <div className="text-[10px] font-mono text-gray-600">#{commit.id}</div>
             </div>
 
-            <h3 className="mb-4 text-sm font-medium text-white/70 italic">
+            <h3 className="mb-3 md:mb-4 text-sm font-medium text-white/70 italic">
                 "{commit.title}"
             </h3>
 
-            <div className={`relative rounded-xl bg-black/40 border p-4 transition-all duration-500 ${
+            <div className={`relative rounded-xl bg-black/40 border p-3 md:p-4 transition-all duration-500 ${
                 isGenerating ? 'border-cyan-500/30 bg-cyan-500/5 animate-pulse' : 'border-white/5'
             }`}>
                 <div className="mb-3 flex items-center justify-between">
@@ -149,7 +149,7 @@ export default function CommitCard({ commit }: CommitProps) {
                                 <div className="h-3 w-1/2 rounded bg-white/5 animate-pulse" />
                             </div>
                         ) : (
-                            <p className="text-sm leading-relaxed text-gray-200 font-medium">
+                            <p className="text-xs sm:text-sm leading-relaxed text-gray-200 font-medium">
                                 {draftText}
                             </p>
                         )}
@@ -160,14 +160,14 @@ export default function CommitCard({ commit }: CommitProps) {
             <div className="mt-6 flex items-center gap-3">
                 <button
                     onClick={() => setIsModalOpen(true)}
-                    className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-cyan-600 py-2.5 text-sm font-bold text-white hover:bg-cyan-500 active:scale-95 transition-all"
+                    className="flex flex-1 items-center justify-center gap-1 md:gap-2 rounded-lg bg-cyan-600 py-2.5 text-xs md:text-sm font-bold text-white hover:bg-cyan-500 active:scale-95 transition-all"
                 >
                     <Eye size={16} /> Preview
                 </button>
 
                 <button
                     onClick={handleCopy}
-                    className={`flex items-center gap-2 rounded-lg border border-white/10 px-4 py-2.5 text-sm font-medium transition-all ${
+                    className={`flex items-center gap-2 rounded-lg border border-white/10 px-4 py-2.5 text-xs md:text-sm font-medium transition-all ${
                         copied ? 'bg-green-500/10 border-green-500/50 text-green-400' : 'bg-white/5 text-gray-300 hover:bg-white/10'
                     }`}
                 >

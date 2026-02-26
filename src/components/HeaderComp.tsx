@@ -14,7 +14,7 @@ export default function HeaderComp() {
             <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2">
-                    <Github className="text-cyan-400" size={24} />
+                    <img src="/trigr-logo.png" className="h-8 w-8" alt="" />
                     <span className="text-xl font-bold tracking-tight text-white">
                         TrigrLog<span className="text-cyan-400">AI</span>
                     </span>
@@ -25,11 +25,13 @@ export default function HeaderComp() {
                     {/* ONLY SHOW DASHBOARD IF LOGGED IN */}
                     {session && (
                         <Link href="/dashboard" className="flex items-center gap-2 text-sm font-medium text-gray-300 transition-colors hover:text-cyan-400 group">
-                            <LayoutDashboard size={16} className="group-hover:rotate-45 transition-all "/>
+                            <LayoutDashboard size={16} className="group-hover:rotate-45 transition-all " />
                             Dashboard
                         </Link>
                     )}
-
+                    <Link href="/docs" className="text-sm text-gray-400 hover:text-white transition-colors">
+                        Docs
+                    </Link>
                     <Link href="#features" className="text-sm text-gray-400 hover:text-white transition-colors">
                         Features
                     </Link>

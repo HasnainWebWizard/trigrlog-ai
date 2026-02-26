@@ -59,14 +59,14 @@ export default function MainFeed({ selectedRepo, initialRepos }: MainFeedProps) 
         <div className="flex w-full max-w-[1600px] flex-col gap-8 lg:flex-row items-start">
             
             {/* 🛡️ Primary Feed Section */}
-            <div className="flex-1 min-w-0 space-y-2">
+            <div className="md:flex-1 min-w-0 space-y-2">
                 
                 {/* 🏛️ Repo Title & Meta */}
                 <div className="mb-6 px-1">
                     <h1 className="text-3xl font-bold tracking-tight text-white uppercase italic">
                         {selectedRepo?.name || "Select Repository"}
                     </h1>
-                    <p className="text-gray-500 text-xs mt-1 font-mono">
+                    <p className="text-gray-500 text-xs mt-1 font-mono break-all">
                         {selectedRepo ? `PATH: github.com/${selectedRepo.owner.login}/${selectedRepo.name}` : "Awaiting repository selection..."}
                     </p>
                 </div>
@@ -94,9 +94,9 @@ export default function MainFeed({ selectedRepo, initialRepos }: MainFeedProps) 
             </div>
 
             {/* 🛡️ Sticky Sidebar: Personality & Settings */}
-            <aside className="hidden lg:block w-[350px] sticky top-8 self-start">
+            {/* <aside className="hidden lg:block w-[350px] sticky top-8 self-start">
                 <AiPernsonality />
-            </aside>
+            </aside> */}
 
             {/* 🏛️ Overlays */}
             <PulseModal

@@ -9,8 +9,8 @@ export default async function DashboardCTR() {
 
     return (
         <>
-            <main className=" overflow-x-hidden flex-1 overflow-y-auto p-4 lg:p-8">
-                <div className="max-w-6xl mx-auto">
+            <main className=" overflow-x-hidden flex-1 overflow-y-auto">
+                <div className="max-w-6xl">
                     <header className="mb-10">
                         <div className="flex items-center gap-2 mb-2">
                             <div className="h-2 w-2 rounded-full bg-cyan-500 animate-pulse" />

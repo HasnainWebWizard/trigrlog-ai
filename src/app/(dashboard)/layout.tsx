@@ -1,5 +1,6 @@
-import Sidebar from '@/components/shared/SideBar';
+import Sidebar from '@/components/SideBar';
 import HeaderDashboard from '@/containers/dashboard/HeaderDashboard';
+import Footer from '@/containers/Footer';
 import { Metadata } from 'next';
 
 
@@ -38,6 +39,7 @@ export default function DashboardLayout({
                             {children}
                         </div>
                     </main>
+                    <Footer/>
                 </div>
             </div>
         </>
