@@ -24,8 +24,8 @@ export default function HeaderComp() {
                 <div className="hidden md:flex items-center gap-6">
                     {/* ONLY SHOW DASHBOARD IF LOGGED IN */}
                     {session && (
-                        <Link href="/dashboard" className="flex items-center gap-2 text-sm font-medium text-gray-300 transition-colors hover:text-cyan-400">
-                            <LayoutDashboard size={16} />
+                        <Link href="/dashboard" className="flex items-center gap-2 text-sm font-medium text-gray-300 transition-colors hover:text-cyan-400 group">
+                            <LayoutDashboard size={16} className="group-hover:rotate-45 transition-all "/>
                             Dashboard
                         </Link>
                     )}

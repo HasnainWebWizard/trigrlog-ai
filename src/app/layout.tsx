@@ -17,6 +17,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "TrigrLog AI",
   description: "TrigrLog AI - The Developer's Narrative Engine",
+  icons: {
+    icon: "/trigr-logo.png",
+  },
 };
 
 export default function RootLayout({
@@ -26,8 +29,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <link rel="icon" href="/trigr-logo.png" type="image/png" />
-
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

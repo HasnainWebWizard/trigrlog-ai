@@ -1,7 +1,15 @@
 import HeaderDashboard from "@/containers/dashboard/HeaderDashboard";
 import SideBarDocs from "@/containers/docs/SideBarDocs";
+import { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
 
+export const metadata: Metadata = {
+  title: "TrigrLog AI",
+  description: "TrigrLog AI - The Developer's Narrative Engine",
+  icons: {
+    icon: "/trigr-logo.png",
+  },
+};
 export default function DocsLayout({ children }: { children: React.ReactNode }) {
     return (
         <div className="flex min-h-screen bg-[#0d1117] text-gray-300">
