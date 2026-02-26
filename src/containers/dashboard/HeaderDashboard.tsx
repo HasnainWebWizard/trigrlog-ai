@@ -17,7 +17,7 @@ export default function HeaderDashboard() {
 
                 {/* Left Section: Mobile Toggle & Logo */}
                 <div className="flex items-center gap-4">
-                    <button 
+                    <button
                         onClick={toggleMenu}
                         className="p-2 text-gray-400 hover:text-white md:hidden transition-colors"
                     >
@@ -25,9 +25,7 @@ export default function HeaderDashboard() {
                     </button>
 
                     <Link href="/" className="flex items-center gap-2">
-                        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600">
-                            <Github className="text-white" size={20} />
-                        </div>
+                        <img src="/trigr-logo.png" className="h-8 w-8" alt="" />
                         <span className="text-xl font-bold tracking-tight text-white">
                             TrigrLog<span className="text-cyan-400">AI</span>
                         </span>
