@@ -51,24 +51,41 @@ export default function DailyPulseContainer({ activeCommits, isFetching, repoNam
 
     const handleDailyPulse = async () => {
         if (activeCommits.length === 0 || isPulseUsed || isPulseGenerating) return;
+
         setIsPulseGenerating(true);
+
         try {
             const commitContext = activeCommits.slice(0, 20).map((c: any) => ({
                 message: c.message,
                 repo: c.repo_name || "Unknown Repo",
                 files: c.files?.map((f: any) => f.filename).join(', ') || "source files"
             }));
+
             const uniqueRepos = Array.from(new Set(activeCommits.map(c => c.repo_name)));
+
             const response = await fetch('/api/daily-pulse', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ messages: commitContext, repoNames: uniqueRepos }),
             });
+
             const data = await response.json();
+
             if (response.ok && data.draft) {
                 onPulseGenerated(data.draft);
                 setIsPulseUsed(true);
                 await checkPulseStatus();
+
+                // Secure call: No tokens or secrets passed here
+                // No Authorization header needed here!
+                await fetch('/api/notifications/save-token/trigger', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        title: "DailyPulse Ready",
+                        body: "My Lord, your daily summary has been crafted."
+                    })
+                });
             }
         } catch (error) {
             console.error("Pulse failed:", error);
@@ -76,7 +93,6 @@ export default function DailyPulseContainer({ activeCommits, isFetching, repoNam
             setIsPulseGenerating(false);
         }
     };
-
     return (
         <div className="relative flex flex-col items-end cursor-pointer">
             {/* Tooltip */}
