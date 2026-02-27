@@ -56,7 +56,7 @@ export default function FeatureContainer({
                     <DailyPulseContainer 
                         activeCommits={activeCommits}
                         isFetching={isFetching}
-                        repoName={repoName}
+                        repoName={repoName || ""}
                         onPulseGenerated={onPulseGenerated}
                     />
 

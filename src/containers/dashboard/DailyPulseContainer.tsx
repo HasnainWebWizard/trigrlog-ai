@@ -8,7 +8,7 @@ import { useSession } from "next-auth/react";
 interface DailyPulseProps {
     activeCommits: any[];
     isFetching: boolean;
-    repoName: string;
+    repoName?: string;
     onPulseGenerated: (draft: string) => void;
 }
 
