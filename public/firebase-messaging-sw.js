@@ -1,3 +1,5 @@
+import { onMessage } from "firebase/messaging";
+import { messaging } from "@/lib/firebase";
 importScripts('https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js');
 importScripts('https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging-compat.js');
 
@@ -11,12 +13,12 @@ firebase.initializeApp({
 const messaging = firebase.messaging();
 
 // Handle the background message
-messaging.onBackgroundMessage((payload) => {
+onMessage(messaging, (payload) => {
   const notificationTitle = payload.notification.title;
   const notificationOptions = {
     body: payload.notification.body,
-    icon: '/trigr-logo.png' // Your custom icon
+    icon: '/trigr-logo.png' // Maintain consistency with your SW file
   };
 
-  self.registration.showNotification(notificationTitle, notificationOptions);
+  new Notification(notificationTitle, notificationOptions);
 });
