@@ -1,8 +1,8 @@
-import { onMessage } from "firebase/messaging";
-import { messaging } from "@/lib/firebase";
+// 1. Load Firebase via CDN
 importScripts('https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js');
 importScripts('https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging-compat.js');
 
+// 2. Initialize
 firebase.initializeApp({
   apiKey: "YOUR_API_KEY",
   projectId: "YOUR_PROJECT_ID",
@@ -12,13 +12,16 @@ firebase.initializeApp({
 
 const messaging = firebase.messaging();
 
-// Handle the background message
-onMessage(messaging, (payload) => {
+// 3. Handle Background Messaging
+// Note: In SW, you use onBackgroundMessage, NOT onMessage
+messaging.onBackgroundMessage((payload) => {
+  console.log('[firebase-messaging-sw.js] Received background message ', payload);
+  
   const notificationTitle = payload.notification.title;
   const notificationOptions = {
     body: payload.notification.body,
-    icon: '/trigr-logo.png' // Maintain consistency with your SW file
+    icon: '/trigr-logo.png'
   };
 
-  new Notification(notificationTitle, notificationOptions);
+  self.registration.showNotification(notificationTitle, notificationOptions);
 });

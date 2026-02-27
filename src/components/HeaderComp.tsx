@@ -11,7 +11,7 @@ export default function HeaderComp() {
 
     return (
         <nav className="sticky top-0 z-50 border-b border-white/5 bg-[#0d1117]/80 backdrop-blur-md">
-            <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
+            <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2">
                     <img src="/trigr-logo.png" className="h-8 w-8" alt="" />

@@ -16,12 +16,13 @@ export default function NotificationRegister() {
         const token = await getToken(messaging, {
           vapidKey: process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY 
         });
-        console.log("Token:", token);
+        // console.log("Token:", token);
 
         await fetch('/api/notifications/save-token', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ token }),
+          credentials: 'include', // This adds the session cookie
         });
       } catch (err) {
         console.error("Token registration failed:", err);

@@ -17,12 +17,7 @@ export default function HeaderDashboard() {
 
                 {/* Left Section: Mobile Toggle & Logo */}
                 <div className="flex items-center gap-4">
-                    <button
-                        onClick={toggleMenu}
-                        className="p-2 text-gray-400 hover:text-white md:hidden transition-colors"
-                    >
-                        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                    </button>
+
 
                     <Link href="/" className="flex items-center gap-2">
                         <img src="/trigr-logo.png" className="h-8 w-8" alt="" />
@@ -30,6 +25,7 @@ export default function HeaderDashboard() {
                             TrigrLog<span className="text-cyan-400">AI</span>
                         </span>
                     </Link>
+
                 </div>
 
                 {/* Center Section: Desktop Navigation */}
@@ -46,9 +42,14 @@ export default function HeaderDashboard() {
                     <div className="hidden items-center gap-1 rounded-full border border-yellow-500/50 bg-yellow-500/10 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-yellow-500 lg:flex">
                         <Crown size={12} /> Pro
                     </div>
-
                     <button className="p-2 text-gray-400 hover:text-white">
                         <Bell size={20} />
+                    </button>
+                    <button
+                        onClick={toggleMenu}
+                        className="p-2 text-gray-400 hover:text-white md:hidden transition-colors"
+                    >
+                        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                     </button>
                 </div>
             </div>

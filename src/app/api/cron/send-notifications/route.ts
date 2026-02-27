@@ -1,24 +1,25 @@
 import { NextResponse } from 'next/server';
 import { adminMessaging } from '@/lib/Firebase/firebaseAdmin';
 
-export async function POST(req: Request) {
-  // 1. Runtime guard
+export async function GET() {
   if (!adminMessaging) {
     return NextResponse.json({ error: 'SDK unavailable' }, { status: 500 });
   }
 
-  // 2. Type guard for the compiler
-  const localMessaging = adminMessaging!;
+  // Define the message manually here
+  // Since we have no DB, we hardcode the target token
+  const message = {
+    token: "YOUR_DEVICE_FCM_TOKEN_HERE", 
+    notification: {
+      title: "Daily Reminder",
+      body: "Dear User, TrigrLog Ai is ready with a new post."
+    }
+  };
 
   try {
-    const { message } = await req.json();
-    
-    // 3. Use the asserted constant
-    await localMessaging.send(message);
-    
+    await adminMessaging.send(message);
     return NextResponse.json({ success: true });
   } catch (error) {
-    // 4. Stringify error to avoid serialization issues
     return NextResponse.json({ error: String(error) }, { status: 500 });
   }
 }
