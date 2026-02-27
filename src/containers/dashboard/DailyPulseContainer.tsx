@@ -8,10 +8,11 @@ import { useSession } from "next-auth/react";
 interface DailyPulseProps {
     activeCommits: any[];
     isFetching: boolean;
+    repoName: string;
     onPulseGenerated: (draft: string) => void;
 }
 
-export default function DailyPulseContainer({ activeCommits, isFetching, onPulseGenerated }: DailyPulseProps) {
+export default function DailyPulseContainer({ activeCommits, isFetching, repoName: string, onPulseGenerated }: DailyPulseProps) {
     const { data: session } = useSession();
     const [isPulseGenerating, setIsPulseGenerating] = useState(false);
     const [isPulseUsed, setIsPulseUsed] = useState(true);
@@ -89,7 +90,7 @@ export default function DailyPulseContainer({ activeCommits, isFetching, onPulse
                     </p>
                 </div>
             )}
-            
+
             {/* Main Button */}
             <button
                 onMouseEnter={() => setShowInfo(true)}
