@@ -5,11 +5,11 @@ import { Metadata } from 'next';
 
 
 export const metadata: Metadata = {
-  title: "TrigrLog AI",
-  description: "TrigrLog AI - The Developer's Narrative Engine",
-  icons: {
-    icon: "/trigr-logo.png",
-  },
+    title: "TrigrLog AI",
+    description: "TrigrLog AI - The Developer's Narrative Engine",
+    icons: {
+        icon: "/trigr-logo.png",
+    },
 };
 
 export default function DashboardLayout({
@@ -39,7 +39,7 @@ export default function DashboardLayout({
                             {children}
                         </div>
                     </main>
-                    <Footer/>
+                    <Footer />
                 </div>
             </div>
         </>

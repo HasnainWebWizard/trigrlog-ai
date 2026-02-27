@@ -8,45 +8,45 @@ const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 export async function POST(req: Request) {
   try {
     const session = await auth();
-    if (!session?.user?.id) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
 
-    const { messages } = await req.json(); // messages is now an array of {message, files}
+    const { messages, repoNames } = await req.json();
 
     const { data: profile } = await supabase
       .from('profiles')
-      .select('selected_tone, keywords, last_pulse_at')
+      .select('selected_tone')
       .eq('id', session.user.id)
       .single();
-
-    // ... (Cooldown check remains the same)
 
     const chatCompletion = await groq.chat.completions.create({
       messages: [
         {
           role: "system",
-          content: `You are a World-Class Technical Content Creator and Strategist. 
-  Your goal is to turn technical git activity into a high-engagement LinkedIn post.
+          content: `You are an experienced, pragmatic Software Engineer building in public. 
+Your goal is to write an honest, authentic LinkedIn update that highlights the REAL work done.
 
-  🏛️ THE REASONING ENGINE:
-  1. NOISE REDUCTION: Ignore vague commit messages like "fix", "update", or "patch". 
-  2. FILE-BASED INSIGHT: Use file paths (e.g., 'hooks/', 'api/', 'styles/') to deduce the technical impact. 
-     - If you see API changes, talk about "Scalability" or "Efficiency".
-     - If you see UI changes, talk about "User Experience" or "Polished Interface".
-  3. THE TRUTH: If a commit is meaningful, prioritize it as the core achievement.
+🏛️ YOUR MENTAL MODEL:
+1. THE WORK IS THE WIN: Focus exclusively on the architectural labor. If the user spent 4 hours refactoring, that is the achievement. Do not gloss over the effort.
+2. NARRATIVE ANCHOR: Start with a punchy theme (e.g., "The Performance Hunt").
+3. TECH SHOWCASE: Weave specific tech usage (e.g., "Refined Next.js routes") into the sentences.
+4. HUMAN VOICE: Use simple words. No marketing fluff.
 
-  ✍️ ENGAGEMENT STRUCTURE:
-  - THE HOOK: Start with a punchy first line. Acknowledge a challenge, a milestone, or a "Lesson Learned" during this session.
-  - THE BUILD: Use a bulleted list to show technical progress. Use action verbs (Architected, Refined, Engineered, Secured).
-  - THE "SO WHAT?": Explain why this work matters for the end user or the project's future.
-  - CALL TO ACTION (CTA): End with a brief, relevant question to invite comments (e.g., "How do you handle state management in production?").
+✍️ THE FORMAT (Strict 7-line max):
+- LINE 1: Hook + Anchor (Theme of the day).
+- LINE 2: Wins (Specific technical achievements/Work done).
+- LINE 3: Takeaway (The value created).
+- LINE 4: Advice (One quick tip).
+- LINE 5: 3-4 hashtags + 1 Emoji.
 
-  TONE: ${profile?.selected_tone || 'casual'}.
-  KEYWORDS: ${profile?.keywords || ''}.
-  STYLE: Clean, structured, using white space for readability. No generic corporate fluff.`
+TONE: ${profile?.selected_tone || 'casual'}.
+STYLE: Punchy. Direct. 
+IMPORTANT: If you exceed 7 lines, you have failed. The user wants to see the effort, not the polish.`
         },
         {
           role: "user",
-          content: `Git Activity Summary: ${JSON.stringify(messages)}`
+          content: `Git Activity Summary (Interpret file paths/messages into tasks. Infer technologies like Next.js, Supabase, etc.): ${JSON.stringify(messages)}`
         }
       ],
       model: "llama-3.3-70b-versatile",
