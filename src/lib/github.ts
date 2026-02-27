@@ -55,7 +55,7 @@ export async function getCommitDetails(accessToken: string, owner: string, repo:
  */
 export async function getRecentCommits(accessToken: string, owner: string, repo: string) {
   try {
-    const response = await fetch(`${GITHUB_API_URL}/repos/${owner}/${repo}/commits?per_page=5`, {
+    const response = await fetch(`${GITHUB_API_URL}/repos/${owner}/${repo}/commits?per_page=100`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
         Accept: 'application/vnd.github.v3+json',
