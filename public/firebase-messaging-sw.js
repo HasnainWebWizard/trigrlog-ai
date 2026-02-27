@@ -9,3 +9,14 @@ firebase.initializeApp({
 });
 
 const messaging = firebase.messaging();
+
+// Handle the background message
+messaging.onBackgroundMessage((payload) => {
+  const notificationTitle = payload.notification.title;
+  const notificationOptions = {
+    body: payload.notification.body,
+    icon: '/trigr-logo.png' // Your custom icon
+  };
+
+  self.registration.showNotification(notificationTitle, notificationOptions);
+});

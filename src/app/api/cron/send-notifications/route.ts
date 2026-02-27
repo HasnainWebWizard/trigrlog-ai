@@ -1,44 +1,42 @@
 import { NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
 import { adminMessaging } from '@/lib/Firebase/firebaseAdmin';
-
-// Define the shape of your data outside the function
-interface UpdateItem {
-  summary: string | null;
-  profiles: { fcm_token: string } | null;
-}
+import { supabase } from '@/lib/supabase';
 
 export async function GET(req: Request) {
   const authHeader = req.headers.get('authorization');
+  
   if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  // Cast the Supabase data to your interface
-  const { data: updates } = await supabase
-    .from('daily_updates') 
-    .select('summary, profiles(fcm_token)')
-    .eq('status', 'pending');
+  // 1. Fetch all tokens from your users table
+  const { data: profiles, error } = await supabase
+    .from('profiles')
+    .select('fcm_token')
+    .not('fcm_token', 'is', null);
 
-  const typedUpdates = (updates as unknown as UpdateItem[]) || [];
+  if (error || !profiles) return NextResponse.json({ error: 'Data fetch failed' }, { status: 500 });
 
-  const promises = typedUpdates.map(async (update) => {
-    // Check if the profile and token exist
-    if (!update.profiles?.fcm_token) return;
+  // 2. Prepare the message payload
+  const message = {
+    notification: {
+      title: "DailyPulse Update",
+      body: "Dear User, the DailyPulse is ready to use. Would you like to use it?"
+    }
+  };
 
+  // 3. Dispatch to all tokens
+  const promises = profiles.map(async (user) => {
     try {
-      await adminMessaging.send({
-        token: update.profiles.fcm_token,
-        notification: {
-          title: 'Daily Pulse: Update Ready',
-          body: update.summary || 'A new update awaits, Dear User.'
-        }
+      await adminMessaging.send({ 
+        token: user.fcm_token, 
+        ...message 
       });
     } catch (e) {
-      console.error('Dispatch failed:', e);
+      console.error(`Failed to send to ${user.fcm_token}:`, e);
     }
   });
 
-  await Promise.all(promises || []);
-  return NextResponse.json({ success: true });
+  await Promise.all(promises);
+  return NextResponse.json({ success: true, count: profiles.length });
 }
