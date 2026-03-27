@@ -11,7 +11,7 @@ export default function HeroSection() {
         <section className="w-screen ml-[calc(50%-50vw)] relative flex min-h-[85vh] flex-col items-center justify-center overflow-hidden bg-[#0d1117] py-20">
 
             {/* Background Decor */}
-            <div className="absolute inset-0 z-0 opacity-20 bg-[linear-gradient(to_right,#1f2937_1px,transparent_1px),linear-gradient(to_bottom,#1f2937_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+            <div className="absolute inset-0 z-0 opacity-20 bg-[linear-gradient(to_right,#1f2937_1px,transparent_1px),linear-gradient(to_bottom,#1f2937_1px,transparent_1px)] bg-size-[40px_40px]"></div>
             <div className="absolute top-1/4 left-1/2 -z-10 h-100 w-150 -translate-x-1/2 rounded-full bg-cyan-500/10 blur-[120px]"></div>
 
             <div className="container relative z-10 mx-auto px-4 text-center">
@@ -24,14 +24,14 @@ export default function HeroSection() {
 
                 <h1 className="mb-6 text-5xl font-extrabold tracking-tight text-white md:text-7xl lg:text-8xl">
                     Your Commits, <br />
-                    <span className="bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
+                    <span className="bg-linear-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
                         Your Career.
                     </span>
                 </h1>
 
                 <p className="mx-auto mb-10 max-w-2xl text-lg text-gray-400 md:text-xl">
                     TrigrLog AI turns your daily code pushes into recruiter-ready LinkedIn posts.
-                    Stop ghosting your network; let your code speak for itself. **Automatically.**
+                    Stop ghosting your network; let your code speak for itself. <strong>Automatically.</strong>
                 </p>
 
                 {/* Primary Action - Logical UI/UX State */}
@@ -80,9 +80,9 @@ export default function HeroSection() {
 
                     {/* Center: The Arrow */}
                     <div className="flex rotate-90 items-center justify-center text-cyan-500 md:rotate-0">
-                        <div className="h-px w-12 bg-gradient-to-r from-transparent via-cyan-500 to-transparent md:w-20" />
+                        <div className="h-px w-12 bg-linear-to-r from-transparent via-cyan-500 to-transparent md:w-20" />
                         <Zap size={24} className="mx-2 fill-cyan-500" />
-                        <div className="h-px w-12 bg-gradient-to-r from-cyan-500 via-cyan-500 to-transparent md:w-20" />
+                        <div className="h-px w-12 bg-linear-to-r from-cyan-500 via-cyan-500 to-transparent md:w-20" />
                     </div>
 
                     {/* Right Side: LinkedIn Post */}

@@ -71,9 +71,9 @@ export default function HeaderDashboard() {
                         <Link href="/docs" onClick={toggleMenu} className="flex items-center gap-3 text-gray-300 hover:text-cyan-400">
                             <BookOpen size={18} /> Documentation
                         </Link>
-                        <Link href="/dashboard/settings" onClick={toggleMenu} className="flex items-center gap-3 text-gray-300 hover:text-cyan-400">
+                        {/* <Link href="/dashboard/settings" onClick={toggleMenu} className="flex items-center gap-3 text-gray-300 hover:text-cyan-400">
                             <Settings size={18} /> Settings
-                        </Link>
+                        </Link> */}
                         <div className="pt-4 mt-2 border-t border-white/5">
                             <button className="w-full rounded-lg bg-yellow-500 py-2 text-xs font-bold text-black">
                                 Upgrade to Pro

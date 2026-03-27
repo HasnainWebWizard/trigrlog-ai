@@ -1,9 +1,7 @@
-import NotificationRegister from '@/components/NotificationRegister';
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
-import LoginNotification from '@/components/LoginNotification';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,13 +32,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <SessionProvider>
-        <LoginNotification />
           <main>
             {children}
           </main>
           {/* <Footer /> */}
         </SessionProvider>
-        <NotificationRegister />
       </body>
     </html>
   );
