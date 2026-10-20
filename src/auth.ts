@@ -4,6 +4,7 @@ import GitHub from "next-auth/providers/github";
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
     GitHub({
+      issuer: "https://github.com/login/oauth",
       authorization: {
         params: {
           scope: "read:user user:email repo",
@@ -13,7 +14,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   ],
   callbacks: {
     async signIn() {
-      // The Gate is now always open. 
+      // The Gate is now always open.
       // No database checks, no sync errors, no delays.
       return true;
     },
